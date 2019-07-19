@@ -90,13 +90,14 @@ router.post("/login", (req, res) => {
                             avatar: user.avatar,
                             identity: user.identity
                         };
-                        //   jwt.sign("规则", "加密名字", "过期时间", "箭头函数");
+                        //   jwt.sign("规则", "加密名字", "过期时间"（3600为一个小时）, "箭头函数");
                         //   res.json({msg: "success"})
-                        jwt.sign(rule, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                        jwt.sign(rule, keys.secretOrKey, { expiresIn: 10 }, (err, token) => {
                             if (err) throw err;
                             res.json({
                                 success: true,
-                                token: "Bearer " + token // 固定写法        // 得到一个token值，接下来可以利用一个 token值 发送一些请求了。
+                                // 固定写法        // 得到一个token值，接下来可以利用一个 token值 发送一些请求了。
+                                token: "Bearer " + token
                             })
                         });
                     } else {
